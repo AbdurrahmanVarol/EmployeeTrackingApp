@@ -1,3 +1,5 @@
+using EmployeeTrackingApp.Application.Features.Commands.CreateJob;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeTrackingApp.API.Controllers
@@ -12,15 +14,18 @@ namespace EmployeeTrackingApp.API.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        private readonly IMediator _mediator;
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public  IEnumerable<WeatherForecast> Get()
         {
+            var command = new CreateJobCommand();
+             _mediator.Send(command);
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

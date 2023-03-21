@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\EmployeeTrackingApp.Application\EmployeeTrackingApp.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\EmployeeTrackingApp.Persistence\EmployeeTrackingApp.Persistence.csproj" />
   </ItemGroup>
 

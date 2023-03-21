@@ -14,6 +14,8 @@ namespace EmployeeTrackingApp.Application
         {
             var assembly = Assembly.GetExecutingAssembly();
             services.AddAutoMapper(assembly);
+            services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(assembly));
+
         }
     }
 }
