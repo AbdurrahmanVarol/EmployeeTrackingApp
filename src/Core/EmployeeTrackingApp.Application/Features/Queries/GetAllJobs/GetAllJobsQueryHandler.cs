@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace EmployeeTrackingApp.Application.Features.Queries.GetAllJob
 {
-    public class GetAllJobQueryHandler : IRequestHandler<GetAllJobsQuery, List<GetAllJobsResponse>>
+    public class GetAllJobsQueryHandler : IRequestHandler<GetAllJobsQuery, List<GetAllJobsResponse>>
     {
         private readonly IMapper _mapper;
         private readonly IJobRepository _jobRepository;
 
 
-        public GetAllJobQueryHandler(IMapper mapper, IJobRepository jobRepository)
+        public GetAllJobsQueryHandler(IMapper mapper, IJobRepository jobRepository)
         {
             _mapper = mapper;
             _jobRepository = jobRepository;

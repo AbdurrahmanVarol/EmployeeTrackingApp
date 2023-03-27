@@ -1,16 +1,15 @@
-﻿using EmployeeTrackingApp.Domain.Common;
-using EmployeeTrackingApp.Domain.Enums;
+﻿using EmployeeTrackingApp.Domain.Enums;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Domain.Entities
+namespace EmployeeTrackingApp.Application.Features.Commands.CreateUser
 {
-    public class User : BaseEntity
+    public class CreateUserCommand : IRequest<Guid>
     {
-        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -18,10 +17,6 @@ namespace EmployeeTrackingApp.Domain.Entities
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
         public UserRole UserRole { get; set; }
-
         public Guid DeparmentId { get; set; }
-        public Department Department { get; set; }
-
-        public ICollection<Job> Jobs { get; set; }
     }
 }

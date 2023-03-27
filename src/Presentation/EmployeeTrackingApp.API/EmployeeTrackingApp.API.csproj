@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\EmployeeTrackingApp.Application\EmployeeTrackingApp.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\EmployeeTrackingApp.Infrastructure\EmployeeTrackingApp.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\EmployeeTrackingApp.Persistence\EmployeeTrackingApp.Persistence.csproj" />
   </ItemGroup>
 

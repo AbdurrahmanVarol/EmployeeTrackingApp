@@ -21,4 +21,8 @@
     <ProjectReference Include="..\..\Core\EmployeeTrackingApp.Application\EmployeeTrackingApp.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EntityFramework\Mapping\" />
+  </ItemGroup>
+
 </Project>

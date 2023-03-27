@@ -1,11 +1,13 @@
 using EmployeeTrackingApp.Application.Features.Commands.CreateJob;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeTrackingApp.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Roles ="Staff")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -25,7 +27,7 @@ namespace EmployeeTrackingApp.API.Controllers
         public  IEnumerable<WeatherForecast> Get()
         {
             var command = new CreateJobCommand();
-             _mediator.Send(command);
+            var x = HttpContext;
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
