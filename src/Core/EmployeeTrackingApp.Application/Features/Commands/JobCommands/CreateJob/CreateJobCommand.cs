@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Application.Features.Commands.CreateJob
+namespace EmployeeTrackingApp.Application.Features.Commands.JobCommands.CreateJob
 {
     public class CreateJobCommand : IRequest<Guid>
     {

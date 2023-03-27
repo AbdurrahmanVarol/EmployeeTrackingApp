@@ -1,17 +1,15 @@
-﻿using EmployeeTrackingApp.Domain.Common;
+﻿using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Domain.Entities
+namespace EmployeeTrackingApp.Application.Features.Commands.UpdateDepartment
 {
-    public class Department : BaseEntity
+    public class UpdateDepartmentCommand : IRequest<bool>
     {
         public Guid Id { get; set; }
         public string DepartmentName { get; set; }
-
-        public ICollection<User> Users { get; set; }
     }
 }

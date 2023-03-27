@@ -1,4 +1,5 @@
-﻿using EmployeeTrackingApp.Application.Features.Commands.CreateUser;
+﻿
+using EmployeeTrackingApp.Application.Features.Commands.UserCommands.CreateUser;
 using EmployeeTrackingApp.Application.Features.Queries.GetUserByUserName;
 using EmployeeTrackingApp.Application.Interfaces.Services;
 using EmployeeTrackingApp.Application.Models;
@@ -6,6 +7,7 @@ using EmployeeTrackingApp.Domain.Entities;
 using EmployeeTrackingApp.Domain.Enums;
 using MediatR;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,7 @@ namespace EmployeeTrackingApp.Infrastructure.Services
     {
         private readonly IMediator _mediator;
         private readonly IConfiguration _configuration;
-
+        //IOptions<StartDto> asd
         public AuthService(IMediator mediator, IConfiguration configuration)
         {
             _mediator = mediator;
@@ -43,7 +45,7 @@ namespace EmployeeTrackingApp.Infrastructure.Services
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
-                new Claim(ClaimTypes.Role,user.UserRole.ToString())
+                new Claim(ClaimTypes.Role,((int)user.UserRole).ToString())
             };
             var jwtSecurityToken = new JwtSecurityToken(
                 issuer: "",
@@ -60,19 +62,18 @@ namespace EmployeeTrackingApp.Infrastructure.Services
 
         public async Task<string> Login(LoginModel loginModel)
         {
-            //var user = await _mediator.Send(new GetUserByUserNameQuery { UserName = loginModel.UserName });
+            var user = await _mediator.Send(new GetUserByUserNameQuery { UserName = loginModel.UserName });
 
-            //if (!VerifyPasswordHash(loginModel.Password, user.PasswordHash, user.PasswordSalt))
-            //    return string.Empty;
-            var user = new User
-            {
-                Id = Guid.NewGuid(),
-                UserRole = UserRole.Staff
-            };
+            if(user is null)
+                return string.Empty;
+
+            if (!VerifyPasswordHash(loginModel.Password, user.PasswordHash, user.PasswordSalt))
+                return string.Empty;
+           
             return GenerateToken(user);
         }
 
-        public void Register(UserModel userModel)
+        public async Task Register(UserModel userModel)
         {
             string passwordHash = string.Empty;
             string passwordSalt = string.Empty;
@@ -88,12 +89,12 @@ namespace EmployeeTrackingApp.Infrastructure.Services
                 FirstName = userModel.FirstName,
                 LastName = userModel.LastName
             };
-            _mediator.Send(createUserCommand);
+            await _mediator.Send(createUserCommand);
         }
 
         public bool VerifyPasswordHash(string password, string passwordHash, string passwordSalt)
         {
-            using var hmac = new System.Security.Cryptography.HMACSHA512(Encoding.UTF8.GetBytes(passwordSalt));
+            using var hmac = new System.Security.Cryptography.HMACSHA512(Convert.FromBase64String(passwordSalt));
 
             var computedHash = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(password)));
 

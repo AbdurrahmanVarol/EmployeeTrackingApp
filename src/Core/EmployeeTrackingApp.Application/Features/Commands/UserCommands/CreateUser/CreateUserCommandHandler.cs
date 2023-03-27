@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Application.Features.Commands.CreateUser
+namespace EmployeeTrackingApp.Application.Features.Commands.UserCommands.CreateUser
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
     {
@@ -23,7 +23,6 @@ namespace EmployeeTrackingApp.Application.Features.Commands.CreateUser
         public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var user = _mapper.Map<User>(request);
-
 
             await _userRepository.AddAsync(user);
 

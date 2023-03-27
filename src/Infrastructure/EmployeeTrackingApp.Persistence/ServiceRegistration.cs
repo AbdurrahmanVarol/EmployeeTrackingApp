@@ -2,6 +2,7 @@
 using EmployeeTrackingApp.Persistence.EntityFramework.Context;
 using EmployeeTrackingApp.Persistence.EntityFramework.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,21 @@ namespace EmployeeTrackingApp.Persistence
     {
         public static void AddPersistenceServices(this IServiceCollection services)
         {
+            ConfigurationManager configuration = new ConfigurationManager();
+            configuration.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../../Presentation/EmployeeTrackingApp.API"));
+            configuration.AddJsonFile("appsettings.json");
+
+
+
+
             services.AddDbContext<EmployeeTrackingAppContext>(options =>
             {
-                options.UseSqlServer("");
-            });
+                options.UseSqlServer(configuration.GetConnectionString("SqlServerConnectionString"));
+            }, ServiceLifetime.Transient);
 
-            services.AddScoped<IUserRepository,UserRepository>();
-            services.AddScoped<IJobRepository,JobRepository>();
-            services.AddScoped<IDepartmentRepository,DepartmentRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IJobRepository, JobRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
         }
     }
 }

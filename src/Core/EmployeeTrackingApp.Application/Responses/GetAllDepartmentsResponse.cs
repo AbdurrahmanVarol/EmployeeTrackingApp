@@ -1,17 +1,14 @@
-﻿using EmployeeTrackingApp.Domain.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Domain.Entities
+namespace EmployeeTrackingApp.Application.Responses
 {
-    public class Department : BaseEntity
+    public class GetAllDepartmentsResponse
     {
         public Guid Id { get; set; }
         public string DepartmentName { get; set; }
-
-        public ICollection<User> Users { get; set; }
     }
 }

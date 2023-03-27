@@ -1,4 +1,4 @@
-using EmployeeTrackingApp.Application.Features.Commands.CreateJob;
+using EmployeeTrackingApp.Application.Features.Commands.JobCommands.CreateJob;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

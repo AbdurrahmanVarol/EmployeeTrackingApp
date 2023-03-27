@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Application.Features.Commands.CreateUser
+namespace EmployeeTrackingApp.Application.Features.Commands.UserCommands.CreateUser
 {
     public class CreateUserCommand : IRequest<Guid>
     {
@@ -17,6 +17,6 @@ namespace EmployeeTrackingApp.Application.Features.Commands.CreateUser
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
         public UserRole UserRole { get; set; }
-        public Guid DeparmentId { get; set; }
+        public Guid? DeparmentId { get; set; }
     }
 }

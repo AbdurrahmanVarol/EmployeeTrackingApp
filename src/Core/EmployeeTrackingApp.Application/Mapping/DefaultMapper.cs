@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using EmployeeTrackingApp.Application.Features.Commands.CreateDepartmet;
-using EmployeeTrackingApp.Application.Features.Commands.CreateJob;
-using EmployeeTrackingApp.Application.Features.Commands.CreateUser;
+using EmployeeTrackingApp.Application.Features.Commands.JobCommands.CreateJob;
+using EmployeeTrackingApp.Application.Features.Commands.UserCommands.CreateUser;
 using EmployeeTrackingApp.Application.Responses;
 using EmployeeTrackingApp.Domain.Entities;
 using System;
@@ -22,6 +22,8 @@ namespace EmployeeTrackingApp.Application.Mapping
             CreateMap<CreateDepartmentCommand, Department>().ReverseMap();
 
             CreateMap<CreateUserCommand, User>().ReverseMap();
+
+            CreateMap<GetAllDepartmentsResponse, Department>().ReverseMap();
         }
     }
 }

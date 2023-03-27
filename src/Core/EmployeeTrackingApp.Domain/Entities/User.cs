@@ -19,7 +19,7 @@ namespace EmployeeTrackingApp.Domain.Entities
         public string PasswordSalt { get; set; }
         public UserRole UserRole { get; set; }
 
-        public Guid DeparmentId { get; set; }
+        public Guid? DeparmentId { get; set; }
         public Department Department { get; set; }
 
         public ICollection<Job> Jobs { get; set; }

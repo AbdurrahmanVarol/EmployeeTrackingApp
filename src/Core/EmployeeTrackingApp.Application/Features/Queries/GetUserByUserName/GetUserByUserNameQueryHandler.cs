@@ -21,9 +21,9 @@ namespace EmployeeTrackingApp.Application.Features.Queries.GetUserByUserName
             _mapper = mapper;
         }
 
-        public Task<User> Handle(GetUserByUserNameQuery request, CancellationToken cancellationToken)
+        public async Task<User> Handle(GetUserByUserNameQuery request, CancellationToken cancellationToken)
         {
-            var user = _userRepository.GetAsync(p => p.UserName.Equals(request.UserName));
+            var user = await _userRepository.GetAsync(p => p.UserName.Equals(request.UserName));
 
             return user;
         }

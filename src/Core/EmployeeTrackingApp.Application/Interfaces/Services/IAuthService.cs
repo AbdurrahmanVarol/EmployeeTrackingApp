@@ -11,7 +11,7 @@ namespace EmployeeTrackingApp.Application.Interfaces.Services
     public interface IAuthService
     {
         Task<string> Login(LoginModel loginModel);
-        void Register(UserModel userModel);
+        Task Register(UserModel userModel);
         void CreatePasswordHash(string password, out string passwordHash, out string passwordSalt);
         bool VerifyPasswordHash(string password, string passwordHash, string passwordSalt);
         string GenerateToken(User user);
