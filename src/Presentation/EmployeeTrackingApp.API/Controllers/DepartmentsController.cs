@@ -23,6 +23,7 @@ namespace EmployeeTrackingApp.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             var departments = await _mediator.Send(new GetAllDepartmentsQuery());
@@ -31,9 +32,10 @@ namespace EmployeeTrackingApp.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] DepartmentModel departmentModel)
         {
+            await _mediator.Send(new CreateDepartmentCommand { DepartmentName = departmentModel.DepartmentName });
 
-           await _mediator.Send(new CreateDepartmentCommand { DepartmentName = departmentModel.DepartmentName });
-            return Ok();
+            var departments = await _mediator.Send(new GetAllDepartmentsQuery());
+            return Ok(new { Departments = departments });
         }
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] DepartmentModel departmentModel)
@@ -41,7 +43,7 @@ namespace EmployeeTrackingApp.API.Controllers
             var result = await _mediator.Send(new UpdateDepartmentCommand { Id = (Guid)departmentModel.Id, DepartmentName = departmentModel.DepartmentName });
             return Ok(new { result });
         }
-        [HttpDelete]        
+        [HttpDelete]
         public async Task<IActionResult> Delete(Guid id)
         {
             var result = await _mediator.Send(new DeleteDepartmentCommand { Id = id });

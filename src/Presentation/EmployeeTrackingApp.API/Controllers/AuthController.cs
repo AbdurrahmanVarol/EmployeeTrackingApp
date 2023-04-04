@@ -30,10 +30,10 @@ namespace EmployeeTrackingApp.API.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
-           var token = await _authService.Login(loginModel);
+           var result = await _authService.Login(loginModel);
 
             
-            return Ok(new {IsSuccess = !string.IsNullOrWhiteSpace(token),token});
+            return Ok(result);
         }
         [HttpPost]
         [Route("register")]

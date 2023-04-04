@@ -3,6 +3,7 @@ using EmployeeTrackingApp.Application.Features.Commands.UserCommands.CreateUser;
 using EmployeeTrackingApp.Application.Features.Queries.GetUserByUserName;
 using EmployeeTrackingApp.Application.Interfaces.Services;
 using EmployeeTrackingApp.Application.Models;
+using EmployeeTrackingApp.Application.Responses;
 using EmployeeTrackingApp.Domain.Entities;
 using EmployeeTrackingApp.Domain.Enums;
 using MediatR;
@@ -57,20 +58,31 @@ namespace EmployeeTrackingApp.Infrastructure.Services
 
             var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
 
+
             return token;
         }
 
-        public async Task<string> Login(LoginModel loginModel)
+        public async Task<LoginResponse> Login(LoginModel loginModel)
         {
             var user = await _mediator.Send(new GetUserByUserNameQuery { UserName = loginModel.UserName });
 
-            if(user is null)
-                return string.Empty;
+            if (user is null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
 
             if (!VerifyPasswordHash(loginModel.Password, user.PasswordHash, user.PasswordSalt))
-                return string.Empty;
-           
-            return GenerateToken(user);
+            {
+                throw new ArgumentException("Kullanııc Bilgileri Doğrulanamadı");
+            }
+
+            var token = GenerateToken(user);
+            var response = new LoginResponse
+            {
+                Token = token,
+                UserRole = user.UserRole
+            };
+            return response;
         }
 
         public async Task Register(UserModel userModel)
