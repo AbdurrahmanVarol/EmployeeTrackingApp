@@ -5,6 +5,7 @@ using EmployeeTrackingApp.Application.Features.Commands.UpdateDepartment;
 using EmployeeTrackingApp.Application.Features.Queries.GetAllDepartments;
 using EmployeeTrackingApp.Application.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -13,6 +14,7 @@ namespace EmployeeTrackingApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class JobsController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -30,17 +32,11 @@ namespace EmployeeTrackingApp.API.Controllers
             return Ok();
         }
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] JobModel jobModel)
+        public async Task<IActionResult> Post([FromBody] CreateJobCommand createJobCommand)
         {
-            var command = new CreateJobCommand
-            {
-                Description = jobModel.Description,
-                DepartmentId = jobModel.DepartmentId,
-                CreatedById = UserId,
-                
-            };
-
-            var result = await _mediator.Send(command);
+            createJobCommand.CreatedAt = DateTime.UtcNow;
+            createJobCommand.CreatedById = UserId;
+            var result = await _mediator.Send(createJobCommand);
             return Ok(new { IsSuccess = true });
         }
         [HttpPut]

@@ -25,7 +25,6 @@ namespace EmployeeTrackingApp.Application.Features.Commands.JobCommands.CreateJo
         public async Task<Guid> Handle(CreateJobCommand request, CancellationToken cancellationToken)
         {
             var job = _mapper.Map<Job>(request);
-            job.CreatedAt = DateTime.UtcNow;
 
             ValidatorTool.FluentValidate(new CreateJobValidator(), job);
 

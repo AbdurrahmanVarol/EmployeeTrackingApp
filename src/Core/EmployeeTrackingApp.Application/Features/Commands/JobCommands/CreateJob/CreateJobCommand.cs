@@ -12,5 +12,6 @@ namespace EmployeeTrackingApp.Application.Features.Commands.JobCommands.CreateJo
         public string Description { get; set; }
         public Guid CreatedById { get; set; }
         public Guid DepartmentId { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

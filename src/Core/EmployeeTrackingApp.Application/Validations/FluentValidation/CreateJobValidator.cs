@@ -12,9 +12,9 @@ namespace EmployeeTrackingApp.Application.Validations.FluentValidation
     {
         public CreateJobValidator()
         {
-            RuleFor(p=>p.DepartmentId).NotEqual(default(Guid)).WithMessage("");
-            RuleFor(p=>p.CreatedById).NotEqual(default(Guid)).WithMessage("");
-            RuleFor(p => p.Description).NotEmpty().MinimumLength(50).WithMessage("");
+            RuleFor(p=>p.DepartmentId).NotEqual(default(Guid));
+            RuleFor(p=>p.CreatedById).NotEqual(default(Guid));
+            RuleFor(p => p.Description).NotEmpty();
         }
     }
 }
