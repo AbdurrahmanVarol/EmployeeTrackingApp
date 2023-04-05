@@ -1,8 +1,5 @@
-﻿using EmployeeTrackingApp.Application.Features.Commands.CreateDepartmet;
-using EmployeeTrackingApp.Application.Features.Commands.DepartmentCommands.DeleteDepartment;
-using EmployeeTrackingApp.Application.Features.Commands.JobCommands.CreateJob;
-using EmployeeTrackingApp.Application.Features.Commands.UpdateDepartment;
-using EmployeeTrackingApp.Application.Features.Queries.GetAllDepartments;
+﻿using EmployeeTrackingApp.Application.Features.Commands.JobCommands.CreateJob;
+using EmployeeTrackingApp.Application.Features.Queries.JobQueries.GetAssignedJobsByUserId;
 using EmployeeTrackingApp.Application.Features.Queries.JobQueries.GetCompletedJobsByUserId;
 using EmployeeTrackingApp.Application.Models;
 using MediatR;
@@ -35,7 +32,19 @@ namespace EmployeeTrackingApp.API.Controllers
         [HttpGet("completed")]
         public async Task<IActionResult> GetCompletedJobs()
         {
-            var jobs = await _mediator.Send(new GetCompletedJobsByUserIdQuery { UserId = UserId});
+            var jobs = await _mediator.Send(new GetCompletedJobsByUserIdQuery
+            {
+                UserId = UserId
+            });
+            return Ok(jobs);
+        }
+        [HttpGet("assigned")]
+        public async Task<IActionResult> GetAssignedJobs()
+        {
+            var jobs = await _mediator.Send(new GetAssignedJobsByUserIdQuery
+            {
+                UserId = UserId
+            });
             return Ok(jobs);
         }
         [HttpPost]
@@ -44,7 +53,7 @@ namespace EmployeeTrackingApp.API.Controllers
             createJobCommand.CreatedAt = DateTime.UtcNow;
             createJobCommand.CreatedById = UserId;
             var result = await _mediator.Send(createJobCommand);
-            return Ok(new { IsSuccess = true });
+            return Ok(new { IsSuccess = result != default(Guid)});
         }
         [HttpPut]
         public IActionResult Put([FromBody] JobModel jobModel)
