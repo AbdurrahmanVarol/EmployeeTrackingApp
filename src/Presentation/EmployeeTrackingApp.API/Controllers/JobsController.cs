@@ -3,6 +3,7 @@ using EmployeeTrackingApp.Application.Features.Commands.DepartmentCommands.Delet
 using EmployeeTrackingApp.Application.Features.Commands.JobCommands.CreateJob;
 using EmployeeTrackingApp.Application.Features.Commands.UpdateDepartment;
 using EmployeeTrackingApp.Application.Features.Queries.GetAllDepartments;
+using EmployeeTrackingApp.Application.Features.Queries.JobQueries.GetCompletedJobsByUserId;
 using EmployeeTrackingApp.Application.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -30,6 +31,12 @@ namespace EmployeeTrackingApp.API.Controllers
         public IActionResult Get()
         {
             return Ok();
+        }
+        [HttpGet("completed")]
+        public async Task<IActionResult> GetCompletedJobs()
+        {
+            var jobs = await _mediator.Send(new GetCompletedJobsByUserIdQuery { UserId = UserId});
+            return Ok(jobs);
         }
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateJobCommand createJobCommand)

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using EmployeeTrackingApp.Application.Features.Queries.GetAllJobs;
 using EmployeeTrackingApp.Application.Interfaces.Repositories;
-using EmployeeTrackingApp.Application.Responses;
+using EmployeeTrackingApp.Application.Responses.JobResponses;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Application.Features.Queries.GetAllJob
+namespace EmployeeTrackingApp.Application.Features.Queries.JobQueries.GetAllJobs
 {
     public class GetAllJobsQueryHandler : IRequestHandler<GetAllJobsQuery, List<GetAllJobsResponse>>
     {

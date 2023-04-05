@@ -3,6 +3,7 @@ using EmployeeTrackingApp.Application.Features.Commands.DepartmentCommands.Delet
 using EmployeeTrackingApp.Application.Features.Commands.UpdateDepartment;
 using EmployeeTrackingApp.Application.Features.Queries.GetAllDepartments;
 using EmployeeTrackingApp.Application.Models;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,13 @@ namespace EmployeeTrackingApp.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private readonly IMediator _mediator;
+
+        public UsersController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         [HttpGet]
         public IActionResult Get()
         {

@@ -19,6 +19,8 @@ namespace EmployeeTrackingApp.Persistence.EntityFramework.Mapping
                     .WithMany(p => p.Users)
                     .HasForeignKey(p => p.DeparmentId);
 
+            builder.Navigation(p => p.Department).AutoInclude();
+
             builder.Property(p => p.Id).HasDefaultValueSql("NEWID()");
         }
     }

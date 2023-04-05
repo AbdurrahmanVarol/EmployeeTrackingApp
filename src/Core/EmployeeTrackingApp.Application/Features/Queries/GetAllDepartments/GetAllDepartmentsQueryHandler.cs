@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EmployeeTrackingApp.Application.Interfaces.Repositories;
-using EmployeeTrackingApp.Application.Responses;
+using EmployeeTrackingApp.Application.Responses.DepartmentResponses;
 using MediatR;
 using System;
 using System.Collections.Generic;

@@ -15,6 +15,8 @@ namespace EmployeeTrackingApp.Persistence.EntityFramework.Mapping
         {
             builder.HasKey(p => p.Id);
 
+
+
             builder
            .HasOne(x => x.Department)
            .WithMany()
@@ -43,6 +45,11 @@ namespace EmployeeTrackingApp.Persistence.EntityFramework.Mapping
                 .WithMany()
                 .HasForeignKey(x => x.ApprovedById)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            builder.Navigation(p => p.ApprovedBy).AutoInclude();
+            builder.Navigation(p => p.CreatedBy).AutoInclude();
+            builder.Navigation(p => p.ClosedBy).AutoInclude();
+            builder.Navigation(p => p.Department).AutoInclude();
 
             builder.Property(p => p.Id).HasDefaultValueSql("NEWID()");
         }

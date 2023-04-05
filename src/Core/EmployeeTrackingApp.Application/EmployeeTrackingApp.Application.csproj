@@ -18,4 +18,8 @@
     <ProjectReference Include="..\EmployeeTrackingApp.Domain\EmployeeTrackingApp.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+  </ItemGroup>
+
 </Project>

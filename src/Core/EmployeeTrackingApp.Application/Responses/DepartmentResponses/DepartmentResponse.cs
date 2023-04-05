@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Application.Responses
+namespace EmployeeTrackingApp.Application.Responses.DepartmentResponses
 {
-    public class GetAllDepartmentsResponse
+    public class DepartmentResponse
     {
         public Guid Id { get; set; }
         public string DepartmentName { get; set; }
