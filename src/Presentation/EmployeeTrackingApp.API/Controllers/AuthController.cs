@@ -1,6 +1,4 @@
-﻿using EmployeeTrackingApp.Application.Features.Queries.GetAllDepartments;
-using EmployeeTrackingApp.Application.Features.Queries.GetUserByUserName;
-using EmployeeTrackingApp.Application.Interfaces.Services;
+﻿using EmployeeTrackingApp.Application.Interfaces.Services;
 using EmployeeTrackingApp.Application.Models;
 using EmployeeTrackingApp.Domain.Enums;
 using MediatR;

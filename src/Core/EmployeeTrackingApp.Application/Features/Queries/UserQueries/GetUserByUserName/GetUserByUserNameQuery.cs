@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Application.Features.Queries.GetUserByUserName
+namespace EmployeeTrackingApp.Application.Features.Queries.UserQueries.GetUserByUserName
 {
     public class GetUserByUserNameQuery : IRequest<User>
     {
         //TODO: User yerine dto dönüledek 
-        public string UserName{ get; set; }
+        public string UserName { get; set; }
     }
 }

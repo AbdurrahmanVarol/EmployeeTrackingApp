@@ -1,7 +1,7 @@
 ﻿using EmployeeTrackingApp.Application.Features.Commands.CreateDepartmet;
 using EmployeeTrackingApp.Application.Features.Commands.DepartmentCommands.DeleteDepartment;
 using EmployeeTrackingApp.Application.Features.Commands.UpdateDepartment;
-using EmployeeTrackingApp.Application.Features.Queries.GetAllDepartments;
+using EmployeeTrackingApp.Application.Features.Queries.DepartmentQueries.GetAllDepartments;
 using EmployeeTrackingApp.Application.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

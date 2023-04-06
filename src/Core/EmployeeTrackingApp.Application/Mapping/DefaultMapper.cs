@@ -18,7 +18,7 @@ namespace EmployeeTrackingApp.Application.Mapping
     {
         public DefaultMapper()
         {
-            //Job Mapping
+            //Job MappingSD
             CreateMap<Job, GetAllJobsResponse>()
                 .ForMember(p => p.ApprovedBy, opt => opt.MapFrom(s => s.ApprovedBy))
                 .ForMember(p => p.CreatedBy, opt => opt.MapFrom(s => s.CreatedBy))

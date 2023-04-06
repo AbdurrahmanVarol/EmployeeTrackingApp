@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Application.Features.Queries.GetUserByUserName
+namespace EmployeeTrackingApp.Application.Features.Queries.UserQueries.GetUserByUserName
 {
     public class GetUserByUserNameQueryHandler : IRequestHandler<GetUserByUserNameQuery, User>
     {

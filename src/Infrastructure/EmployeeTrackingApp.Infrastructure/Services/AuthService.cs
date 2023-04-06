@@ -1,6 +1,6 @@
 ﻿
 using EmployeeTrackingApp.Application.Features.Commands.UserCommands.CreateUser;
-using EmployeeTrackingApp.Application.Features.Queries.GetUserByUserName;
+using EmployeeTrackingApp.Application.Features.Queries.UserQueries.GetUserByUserName;
 using EmployeeTrackingApp.Application.Interfaces.Services;
 using EmployeeTrackingApp.Application.Models;
 using EmployeeTrackingApp.Application.Responses;

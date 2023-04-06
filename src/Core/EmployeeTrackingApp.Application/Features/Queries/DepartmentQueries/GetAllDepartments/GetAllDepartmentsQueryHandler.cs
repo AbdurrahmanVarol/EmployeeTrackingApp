@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Application.Features.Queries.GetAllDepartments
+namespace EmployeeTrackingApp.Application.Features.Queries.DepartmentQueries.GetAllDepartments
 {
     public class GetAllDepartmentsQueryHandler : IRequestHandler<GetAllDepartmentsQuery, List<GetAllDepartmentsResponse>>
     {
@@ -23,10 +23,10 @@ namespace EmployeeTrackingApp.Application.Features.Queries.GetAllDepartments
 
         public async Task<List<GetAllDepartmentsResponse>> Handle(GetAllDepartmentsQuery request, CancellationToken cancellationToken)
         {
-            var departments = (await _departmentRepository.GetAllAsync()).OrderBy(p=>p.DepartmentName).ToList();
-            
+            var departments = (await _departmentRepository.GetAllAsync()).OrderBy(p => p.DepartmentName).ToList();
 
-            return _mapper.Map<List<GetAllDepartmentsResponse>>(departments);;
+
+            return _mapper.Map<List<GetAllDepartmentsResponse>>(departments); ;
 
         }
     }

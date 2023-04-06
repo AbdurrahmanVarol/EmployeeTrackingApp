@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Application.Features.Queries.GetAllDepartments
+namespace EmployeeTrackingApp.Application.Features.Queries.DepartmentQueries.GetAllDepartments
 {
     public class GetAllDepartmentsQuery : IRequest<List<GetAllDepartmentsResponse>>
     {

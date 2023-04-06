@@ -1,9 +1,10 @@
 ﻿using EmployeeTrackingApp.Application.Features.Commands.CreateDepartmet;
 using EmployeeTrackingApp.Application.Features.Commands.DepartmentCommands.DeleteDepartment;
 using EmployeeTrackingApp.Application.Features.Commands.UpdateDepartment;
-using EmployeeTrackingApp.Application.Features.Queries.GetAllDepartments;
+using EmployeeTrackingApp.Application.Features.Queries.UserQueries.GetAllUser;
 using EmployeeTrackingApp.Application.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +12,7 @@ namespace EmployeeTrackingApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -21,9 +23,10 @@ namespace EmployeeTrackingApp.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok();
+            var users = await _mediator.Send(new GetAllUsersQuery());
+            return Ok(users);
         }
         [HttpPost]
         public IActionResult Post([FromBody] DepartmentModel departmentModel)

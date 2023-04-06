@@ -47,10 +47,16 @@ namespace EmployeeTrackingApp.API.Controllers
             });
             return Ok(jobs);
         }
+        [HttpGet("unassigned")]
+        public async Task<IActionResult> GetUnAssignedJobs()
+        {
+            var jobs = await _mediator.Send(new GetUnAssignedJobsByUserIdQuery());
+            return Ok(jobs);
+        }
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateJobCommand createJobCommand)
         {
-            createJobCommand.CreatedAt = DateTime.UtcNow;
+            createJobCommand.CreatedAt = DateTime.Now;
             createJobCommand.CreatedById = UserId;
             var result = await _mediator.Send(createJobCommand);
             return Ok(new { IsSuccess = result != default(Guid)});
