@@ -1,4 +1,5 @@
-﻿using EmployeeTrackingApp.Domain.Entities;
+﻿using EmployeeTrackingApp.Application.Responses.UserResponses;
+using EmployeeTrackingApp.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;

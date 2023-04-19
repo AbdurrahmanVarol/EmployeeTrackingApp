@@ -1,5 +1,6 @@
 ﻿
 using EmployeeTrackingApp.Application.Features.Commands.UserCommands.CreateUser;
+using EmployeeTrackingApp.Application.Features.Queries.UserQueries.GetUserByRefreshTokenAndUserId;
 using EmployeeTrackingApp.Application.Features.Queries.UserQueries.GetUserByUserName;
 using EmployeeTrackingApp.Application.Interfaces.Services;
 using EmployeeTrackingApp.Application.Models;
@@ -62,7 +63,7 @@ namespace EmployeeTrackingApp.Infrastructure.Services
             return token;
         }
 
-        public async Task<LoginResponse> Login(LoginModel loginModel)
+        public async Task<LoginResponse> LoginAsync(LoginModel loginModel)
         {
             var user = await _mediator.Send(new GetUserByUserNameQuery { UserName = loginModel.UserName });
 
@@ -80,12 +81,34 @@ namespace EmployeeTrackingApp.Infrastructure.Services
             var response = new LoginResponse
             {
                 Token = token,
-                UserRole = user.UserRole
+                UserRole = user.UserRole,
+                RefreshToken = user.RefreshToken
             };
             return response;
         }
+        public async Task<LoginResponse> RefreshTokenAsync(string refreshToken, Guid userId)
+        {
 
-        public async Task Register(UserModel userModel)
+           var user = await _mediator.Send(new GetUserByRefreshTokenAndUserIdQuery() { RefreshToken = refreshToken, UserId = userId });
+
+           
+            if (user is null)
+            {
+                return null;
+            }
+
+            var token = GenerateToken(user);
+            var response = new LoginResponse
+            {
+                Token = token,
+                UserRole = user.UserRole,
+                RefreshToken = user.RefreshToken
+            };
+            return response;
+
+        }
+
+        public async Task RegisterAsync(UserModel userModel)
         {
             string passwordHash = string.Empty;
             string passwordSalt = string.Empty;
@@ -99,7 +122,8 @@ namespace EmployeeTrackingApp.Infrastructure.Services
                 PasswordSalt = passwordSalt,
                 Email = userModel.Email,
                 FirstName = userModel.FirstName,
-                LastName = userModel.LastName
+                LastName = userModel.LastName,
+                RefreshToken = Guid.NewGuid().ToString()
             };
             await _mediator.Send(createUserCommand);
         }

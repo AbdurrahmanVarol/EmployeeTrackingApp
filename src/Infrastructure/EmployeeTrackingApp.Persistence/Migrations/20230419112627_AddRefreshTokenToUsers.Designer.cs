@@ -4,6 +4,7 @@ using EmployeeTrackingApp.Persistence.EntityFramework.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeTrackingApp.Persistence.Migrations
 {
     [DbContext(typeof(EmployeeTrackingAppContext))]
-    partial class EmployeeTrackingAppContextModelSnapshot : ModelSnapshot
+    [Migration("20230419112627_AddRefreshTokenToUsers")]
+    partial class AddRefreshTokenToUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

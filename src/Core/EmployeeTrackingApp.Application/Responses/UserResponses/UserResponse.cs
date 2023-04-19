@@ -15,10 +15,10 @@ namespace EmployeeTrackingApp.Application.Responses.UserResponses
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName => $"{FirstName} {LastName}";
-
         public string Email { get; set; }
         public string UserName { get; set; }
         public UserRole UserRole { get; set; }
+        public string RefreshToken { get; set; }
 
         public DepartmentResponse Department { get; set; }
     }

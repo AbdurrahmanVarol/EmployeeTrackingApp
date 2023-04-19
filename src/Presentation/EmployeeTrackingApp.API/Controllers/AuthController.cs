@@ -1,9 +1,11 @@
 ﻿using EmployeeTrackingApp.Application.Interfaces.Services;
 using EmployeeTrackingApp.Application.Models;
+using EmployeeTrackingApp.Application.Responses;
 using EmployeeTrackingApp.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using System.Security.Claims;
 
 namespace EmployeeTrackingApp.API.Controllers
@@ -28,18 +30,23 @@ namespace EmployeeTrackingApp.API.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
-           var result = await _authService.Login(loginModel);
+            var result = await _authService.LoginAsync(loginModel);
 
-            
+
             return Ok(result);
+        }
+        [HttpPost("Refresh")]
+        public async Task<ActionResult<LoginResponse>> Refresh([FromBody] RefreshTokenModel refreshToken)
+        {
+            return await _authService.RefreshTokenAsync(refreshToken.RefreshToken, UserId);
         }
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] UserModel userModel)
         {
-            await _authService.Register(userModel);
-            
-            return Ok(new {IsSuccess=true});
+            await _authService.RegisterAsync(userModel);
+
+            return Ok(new { IsSuccess = true });
         }
     }
 }

@@ -18,5 +18,6 @@ namespace EmployeeTrackingApp.Application.Features.Commands.UserCommands.CreateU
         public string PasswordSalt { get; set; }
         public UserRole UserRole { get; set; }
         public Guid? DeparmentId { get; set; }
+        public string RefreshToken { get; set; }
     }
 }

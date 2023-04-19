@@ -9,23 +9,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeTrackingApp.Application.Features.Queries.UserQueries.GetUserByUserName
+namespace EmployeeTrackingApp.Application.Features.Queries.UserQueries.GetUserByRefreshTokenAndUserId
 {
-    public class GetUserByUserNameQueryHandler : IRequestHandler<GetUserByUserNameQuery, User>
+    public class GetUserByRefreshTokenAndUserIdQueryHandler : IRequestHandler<GetUserByRefreshTokenAndUserIdQuery, User>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public GetUserByUserNameQueryHandler(IUserRepository userRepository, IMapper mapper)
+        public GetUserByRefreshTokenAndUserIdQueryHandler(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;
         }
 
-        public async Task<User> Handle(GetUserByUserNameQuery request, CancellationToken cancellationToken)
+        public Task<User> Handle(GetUserByRefreshTokenAndUserIdQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetAsync(p => p.UserName.Equals(request.UserName));
-
+            var user = _userRepository.GetAsync(p=>p.Id == request.UserId && p.RefreshToken.Equals(request.RefreshToken));
             return user;
         }
     }
